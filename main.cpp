@@ -1,97 +1,98 @@
 #include <iostream>
 using namespace std;
 
+void swapValues(int* p1, int* p2) {
+    int temp = *p1;
+    *p1 = *p2;
+    *p2 = temp;
+}
+
+
+void printArray(int* arr, int size) {
+    for(int i = 0; i < size; i++) {
+        cout << *(arr + i) << " ";
+    }
+    cout << endl;
+}
+
+
+int findSum(int* arr, int size) {
+    int sum = 0;
+    for(int i = 0; i < size; i++) {
+        sum += *(arr + i);
+    }
+    return sum;
+}
+
+
+void shiftRight(int* arr, int size) {
+    int last = *(arr + size - 1);
+
+    for(int i = size - 1; i > 0; i--) {
+        *(arr + i) = *(arr + i - 1);
+    }
+
+    *arr = last;
+}
+
+int* createArray(int size) {
+    int* arr = new int[size];
+    return arr;
+}
+
+void deleteArray(int* arr) {
+    delete[] arr;
+}
+
+
 int main() {
-    int num;
-    int steps = 0;
-
-    cout << "1 den buyuk bir sayi girin: ";
-    cin >> num;
-
-    cout << num;
-
-    while (num != 1) {
-        if (num % 2 == 0) {
-            num = num / 2;
-        } else {
-            num = num * 3 + 1;
-        }
-
-        cout << " -> " << num;
-        steps++;
-    }
-
-    cout << "\nToplam adim: " << steps << endl;
-
-    /////////////////////////////////////////////////////////////task2
     int n;
+    int sum=0;
+    int size=0;
 
-    cout << "Enter a number between 10 and 100: ";
+
+    cout << "Enter array size: ";
     cin >> n;
+    size = n;
 
-    while (n < 10 || n > 100) {
-        cout << "Invalid! Enter a number between 10 and 100: ";
-        cin >> n;
+    int arr[n];
+
+    cout << "Enter values: ";
+
+    for(int i = 0; i < n; i++) {
+        cin >> arr[i];
+        cout<< i+1 << ". sayi " << arr[i]<<endl;
+        sum+=arr[i];
+
     }
+    cout<<"total sum of numbers "<<sum<<endl;
+    cout<<"-------------------------------";
+    cout<<"\n a,b ikilisi girin";
+    int a , b ;
+    cin>>a>>b;
 
-    int fizz_count = 0;
-    int buzz_count = 0;
-    int fizzbuzz_count = 0;
+    cout << "\nBefore swap\n";
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
 
-    for (int i = 1; i <= n; i++) {
+    swapValues(&a, &b);
 
-        if (i % 7 == 0) {
-            cout << i << " skipped" << endl;
-            continue;
-        }
+    cout << "\nAfter swap\n";
+    cout << "a = " << a << endl;
+    cout << "b = " << b << endl;
 
-        if (i % 3 == 0 && i % 5 == 0) {
-            cout << "FizzBuzz" << endl;
-            fizzbuzz_count++;
-        }
-        else if (i % 3 == 0) {
-            cout << "Fizz" << endl;
-            fizz_count++;
-        }
-        else if (i % 5 == 0) {
-            cout << "Buzz" << endl;
-            buzz_count++;
-        }
-        else {
-            cout << i << endl;
-        }
-    }
+    cout << "\n----------------------------------\n";
+    cout << "Shifting array right...\n";
 
-    cout << "Summary:" << endl;
-    cout << "Fizz: " << fizz_count << endl;
-    cout << "Buzz: " << buzz_count << endl;
-    cout << "FizzBuzz: " << fizzbuzz_count << endl;
-/////////////////////////////////////////////////////////////////task3
-    int nem;
+    shiftRight(arr, size);
 
-    cout << "Enter a number between 3 and 9: ";
-    cin >> nem;
+    cout << "\n after shiftRight:\n";
+    printArray(arr, size);
 
-    while (nem < 3 || nem > 9) {
-        cout << "Invalid! Enter a number between 3 and 9: ";
-        cin >> nem;
-    }
+    cout << "\n-----------------------------------\n";
 
-    // üst kısım
-    for (int i = 1; i <= nem; i++) {
-        for (int j = 0; j < i; j++) {
-            cout << "*";
-        }
-        cout << endl;
-    }
-
-    // alt kısım
-    for (int i = nem - 1; i > 0; i--) {
-        for (int j = 0; j < i; j++) {
-            cout << "*";
-        }
-        cout << endl;
-    }
+    cout << "Deleting array\n";
+    deleteArray(arr);
 
     return 0;
 }
