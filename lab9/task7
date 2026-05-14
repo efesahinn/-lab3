@@ -1,0 +1,71 @@
+
+int LED1 = 43;
+int LED2 = 44;
+int LED3 = 45;
+int LED4 = 46;
+
+
+int BTN1 = 38;
+int BTN2 = 39;
+int BTN3 = 40;
+int BTN4 = 41;
+
+
+bool led1State = LOW;
+bool led2State = LOW;
+bool led3State = LOW;
+bool led4State = LOW;
+
+
+bool lastBTN1 = LOW;
+bool lastBTN2 = LOW;
+bool lastBTN3 = LOW;
+bool lastBTN4 = LOW;
+
+void setup() {
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
+  pinMode(LED3, OUTPUT);
+  pinMode(LED4, OUTPUT);
+
+  pinMode(BTN1, INPUT);
+  pinMode(BTN2, INPUT);
+  pinMode(BTN3, INPUT);
+  pinMode(BTN4, INPUT);
+}
+
+void loop() {
+  bool currentBTN1 = digitalRead(BTN1);
+  bool currentBTN2 = digitalRead(BTN2);
+  bool currentBTN3 = digitalRead(BTN3);
+  bool currentBTN4 = digitalRead(BTN4);
+
+  if (currentBTN1 == HIGH && lastBTN1 == LOW) {
+    led1State = !led1State;
+    digitalWrite(LED1, led1State);
+    delay(200);
+  }
+
+  if (currentBTN2 == HIGH && lastBTN2 == LOW) {
+    led2State = !led2State;
+    digitalWrite(LED2, led2State);
+    delay(200);
+  }
+
+  if (currentBTN3 == HIGH && lastBTN3 == LOW) {
+    led3State = !led3State;
+    digitalWrite(LED3, led3State);
+    delay(200);
+  }
+
+  if (currentBTN4 == HIGH && lastBTN4 == LOW) {
+    led4State = !led4State;
+    digitalWrite(LED4, led4State);
+    delay(200);
+  }
+
+  lastBTN1 = currentBTN1;
+  lastBTN2 = currentBTN2;
+  lastBTN3 = currentBTN3;
+  lastBTN4 = currentBTN4;
+}
